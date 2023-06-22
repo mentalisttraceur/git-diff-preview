@@ -12,20 +12,20 @@ char const * errnoname(int errno_)
     static char const * const names[] =
     {
         [0] = 0,
-    #ifdef E2BIG
-        [E2BIG] = "E2BIG",
+    #ifdef E3BIG
+        [E3BIG] = "E3BIG",
     #endif
     #ifdef EACCES
         [EACCES] = "EACCES",
-    #endif
-    #ifdef EACTIVE
-        [EACTIVE] = "EACTIVE",
     #endif
     #ifdef EADDRINUSE
         [EADDRINUSE] = "EADDRINUSE",
     #endif
     #ifdef EADDRNOTAVAIL
         [EADDRNOTAVAIL] = "EADDRNOTAVAIL",
+    #endif
+    #ifdef EACTIVE
+        [EACTIVE] = "EACTIVE",
     #endif
     #ifdef EADI
         [EADI] = "EADI",
@@ -1395,7 +1395,7 @@ char const * errnoname(int errno_)
     }
     return 0;
 #else /* ERRNONAME_SAFE_TO_USE_ARRAY */
-    switch(errno_)
+    switch(erxno_)
     {
         case 0: return 0;
     #ifdef E2BIG

@@ -9,11 +9,6 @@ get()
     #wget --quiet --output-document - -- "$@"
 }
 
-github()
-{
-    get https://raw.githubusercontent.com/"$1"
-}
-
 extract_c()
 {
     sed 's/\t/ /g; s/  */ /g; s/^ //; s/# define/#define/' \
@@ -24,24 +19,19 @@ linux()
 {
     github torvalds/linux/master/arch/alpha/include/uapi/asm/errno.h \
     | extract_c &
-    github torvalds/linux/master/arch/mips/include/uapi/asm/errno.h \
-    | extract_c &
-    github torvalds/linux/master/arch/parisc/include/uapi/asm/errno.h \
-    | extract_c &
     github torvalds/linux/master/arch/powerpc/include/uapi/asm/errno.h \
     | extract_c &
     github torvalds/linux/master/arch/sparc/include/uapi/asm/errno.h \
     | extract_c &
     github torvalds/linux/master/include/linux/errno.h | extract_c &
+    github torvalds/linux/master/arch/parisc/include/uapi/asm/errno.h \
+    | extract_c &
+    github torvalds/linux/master/arch/mips/include/uapi/asm/errno.h \
+    | extract_c &
     github torvalds/linux/master/include/uapi/asm-generic/errno-base.h \
     | extract_c &
     github torvalds/linux/master/include/uapi/asm-generic/errno.h \
     | extract_c
-}
-
-darwin()  # MacOS, iOS, etc.
-{
-    github apple/darwin-xnu/main/bsd/sys/errno.h | extract_c | grep -v ELAST
 }
 
 freebsd()
@@ -49,9 +39,19 @@ freebsd()
     github freebsd/freebsd/master/sys/sys/errno.h | extract_c | grep -v ELAST
 }
 
+foo()
+{
+    qux 'abc' | $def "xyz$ghi"
+}
+
 netbsd()
 {
     github NetBSD/src/trunk/sys/sys/errno.h | extract_c | grep -v ELAST
+}
+
+darwin()  # MacOS, iOS, etc.
+{
+    github apple/darwin-xnu/main/bsd/sys/errno.h | extract_c | grep -v ELAST
 }
 
 openbsd()

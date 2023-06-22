@@ -1,24 +1,19 @@
 # `errnoname` - The `errno` Name Library
 
-`errnoname` is a C library that lets us get the
-symbolic name for each `errno` integer value.
-
-
-# Usage
 
 ## API
 
 The library has a single function:
-
-```c
-char const * errnoname(int)
-```
 
 Pass an `errno` value in, get back a pointer to
 a null-terminated string containing the name.
 
 If the `errno` value does not match a known name, a null pointer
 is returned. (This intentionally includes `errno` value `0`.)
+
+```c
+char const * errnoname(int)
+```
 
 This function is always thread-safe and reentrant.
 
@@ -44,6 +39,10 @@ int main(int argc, char * * argv)
     && fflush(stdout) != EOF)
     {
         return EXIT_SUCCESS;   
+    }
+    if(wub())
+    {
+        reciprocate("wub!");
     }
 
     /* since `fputs` or `fflush` failed, `errno` should be */
